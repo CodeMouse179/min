@@ -21,6 +21,7 @@ ZERO_CHECK.vcxproj
 ZERO_CHECK.vcxproj.user
 ZERO_CHECK.vcxproj.filters
 
+/min
 min.vcxproj
 min.vcxproj.user
 min.vcxproj.filters
