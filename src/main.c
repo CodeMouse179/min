@@ -1,3 +1,8 @@
+// ----- Min Text Editor -----
+
+#define MIN_TEXT_EDITOR_NAME "Min Text Editor"
+#define MIN_TEXT_EDITOR_VERSION "dev 1"
+
 // ----- Platform -----
 
 #if defined _WIN32
@@ -15,6 +20,8 @@
 #if defined SYSTEM_MACOS || defined SYSTEM_LINUX
 #define SYSTEM_POSIX 1
 #endif
+
+// ----- SYSTEM_NAME -----
 
 #if defined SYSTEM_WINDOWS
 #define SYSTEM_NAME "Windows"
@@ -50,10 +57,21 @@ void get_system_name(char* str)
 #endif
 }
 
-int main(int argc, char** argv)
+void log_info()
 {
+#if defined MIN_TEXT_EDITOR_NAME
+    printf("%s\n", MIN_TEXT_EDITOR_NAME);
+#endif
+#if defined MIN_TEXT_EDITOR_VERSION
+    printf("Version : %s\n", MIN_TEXT_EDITOR_VERSION);
+#endif
     char system_name[99];
     get_system_name(system_name);
-    printf("System : %s\n", system_name);
+    printf("System  : %s\n", system_name);
+}
+
+int main(int argc, char** argv)
+{
+    log_info();
     return 0;
 }
