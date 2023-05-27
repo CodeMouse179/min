@@ -101,9 +101,36 @@ void lua_test(const char* lua_script)
     lua_close(L);
 }
 
+int lua_console_write(lua_State* L)
+{
+    const char* str = lua_tostring(L, 1);
+    printf("%s", str);
+    return 0;
+}
+
+void lua_test2(const char* lua_script)
+{
+    lua_State* L = luaL_newstate();
+
+    lua_newtable(L);
+    lua_pushcfunction(L, lua_console_write);
+    lua_setfield(L, -2, "write");
+    lua_setglobal(L, "console");
+
+    int r = luaL_dostring(L, lua_script);
+    if (r != LUA_OK)
+    {
+        const char* err_msg = lua_tostring(L, -1);
+        printf("!Lua Error Message: %s", err_msg);
+    }
+
+    lua_close(L);
+}
+
 int main(int argc, char** argv)
 {
     log_info();
     lua_test("print('Hello, World!')");
+    lua_test2("console.write('OK!')");
     return 0;
 }
