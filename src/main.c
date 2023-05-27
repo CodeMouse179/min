@@ -47,6 +47,17 @@
 
 #include <string.h>
 #include <stdio.h>
+#include <stdbool.h>
+
+// ----- Platform Header -----
+
+#if defined SYSTEM_WINDOWS
+
+#endif
+
+#if defined SYSTEM_POSIX
+
+#endif
 
 // ----- Function -----
 
