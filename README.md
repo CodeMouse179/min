@@ -4,6 +4,8 @@
 
 ## intro
 
+Windows(OK), macOS(OK), Linux(TODO)
+
 min is a modern cross-platform C11 text editor.
 
 ## build & run
