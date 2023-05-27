@@ -4,6 +4,8 @@ project(min_project)
 
 set(CMAKE_C_STANDARD 11)
 
+include_directories(src/lua)
+
 add_executable(min
     src/main.c
     src/lua/lapi.c
