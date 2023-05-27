@@ -49,10 +49,17 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+// ----- Lua Header -----
+
+#include "lua.h"
+#include "lualib.h"
+#include "lauxlib.h"
+
 // ----- Platform Header -----
 
 #if defined SYSTEM_WINDOWS
-
+#define NOMINMAX
+#include <Windows.h>
 #endif
 
 #if defined SYSTEM_POSIX
@@ -68,7 +75,7 @@ void get_system_name(char* str)
 #endif
 }
 
-void log_info()
+void log_info(void)
 {
 #if defined MIN_TEXT_EDITOR_NAME
     printf("%s\n", MIN_TEXT_EDITOR_NAME);
@@ -81,8 +88,22 @@ void log_info()
     printf("System  : %s\n", system_name);
 }
 
+void lua_test(const char* lua_script)
+{
+    lua_State* L = luaL_newstate();
+    luaL_openlibs(L);
+    int r = luaL_dostring(L, lua_script);
+    if (r != LUA_OK)
+    {
+        const char* err_msg = lua_tostring(L, -1);
+        printf("!Lua Error Message: %s", err_msg);
+    }
+    lua_close(L);
+}
+
 int main(int argc, char** argv)
 {
     log_info();
+    lua_test("print('Hello, World!')");
     return 0;
 }
